@@ -31,12 +31,12 @@ type SliderSetting = SettingBasic<number> & {
 export type Hexcode = `#${string}`;
 type ColorSetting = SettingBasic<Hexcode> & {
 	type: 'color';
-}
+};
 export type SaveableSettings = {
-	settings: { [key: string]: number | boolean | string | Hexcode },
-	isSettings: boolean,
-	version: number
-}
+	settings: { [key: string]: number | boolean | string | Hexcode };
+	isSettings: boolean;
+	version: number;
+};
 export type Setting = ToggleSetting | RadioSetting | SliderSetting | ColorSetting;
 class Settings {
 	data: { [key: string]: Setting };
@@ -86,7 +86,7 @@ class Settings {
 			}
 		}
 
-		let jsonData: SaveableSettings = {
+		const jsonData: SaveableSettings = {
 			settings: jsonSettingsData,
 			isSettings: true,
 			version: SETTINGS_VERSION
@@ -94,8 +94,8 @@ class Settings {
 
 		return JSON.stringify(jsonData);
 	}
-	parseJsonToSettings(jsonData: {[key: string]: any}) {
-		if (!jsonData["isSettings"]) {
+	parseJsonToSettings(jsonData: { [key: string]: any }) {
+		if (!jsonData['isSettings']) {
 			return;
 		}
 
@@ -105,14 +105,14 @@ class Settings {
 			for (const key in settingsData.settings) {
 				if (this.data[key] == null) {
 					continue;
-				};
+				}
 				if (this.data[key].type == 'radio') {
 					const setting = this.data[key] as RadioSetting;
-					if (settingsData["settings"][key + 'Custom']) {
-						setting.detail.customOptionValue = settingsData["settings"][key + 'Custom'] as string;
+					if (settingsData['settings'][key + 'Custom']) {
+						setting.detail.customOptionValue = settingsData['settings'][key + 'Custom'] as string;
 					}
 				}
-				this.setValue(key, settingsData["settings"][key] as number | boolean | Hexcode);
+				this.setValue(key, settingsData['settings'][key] as number | boolean | Hexcode);
 			}
 		} catch (e) {
 			localStorage.setItem('settings', JSON.stringify({}));
@@ -152,7 +152,7 @@ class Settings {
 				const r = Math.floor(Math.random() * 256).toString(16);
 				const g = Math.floor(Math.random() * 256).toString(16);
 				const b = Math.floor(Math.random() * 256).toString(16);
-				this.setValue(key, ("#" + r + g + b) as Hexcode);
+				this.setValue(key, ('#' + r + g + b) as Hexcode);
 			}
 		}
 	}
@@ -173,7 +173,8 @@ export const settings: Settings = new Settings({
 				'Big Questions',
 				'NOF SPAR',
 				'Parli',
-				'Classic'
+				'Classic',
+				'British Parliamentary'
 			]
 		},
 		info: "Already created flows won't be affected by this setting"
@@ -202,8 +203,8 @@ export const settings: Settings = new Settings({
 	customBackgroundBack: {
 		name: 'Back background',
 		type: 'color',
-		value: "#1a1a1a",
-		auto: "#1a1a1a",
+		value: '#1a1a1a',
+		auto: '#1a1a1a',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -211,8 +212,8 @@ export const settings: Settings = new Settings({
 	customBackground: {
 		name: 'Background',
 		type: 'color',
-		value: "#292929",
-		auto: "#292929",
+		value: '#292929',
+		auto: '#292929',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -220,8 +221,8 @@ export const settings: Settings = new Settings({
 	customBackgroundIndent: {
 		name: 'Highlighted background',
 		type: 'color',
-		value: "#3d3d3d",
-		auto: "#3d3d3d",
+		value: '#3d3d3d',
+		auto: '#3d3d3d',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -229,8 +230,8 @@ export const settings: Settings = new Settings({
 	customBackgroundActive: {
 		name: 'Clicked background',
 		type: 'color',
-		value: "#4d4d4d",
-		auto: "#4d4d4d",
+		value: '#4d4d4d',
+		auto: '#4d4d4d',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -238,8 +239,8 @@ export const settings: Settings = new Settings({
 	customBackgroundSecondary: {
 		name: 'Background',
 		type: 'color',
-		value: "#2e2e2e",
-		auto: "#2e2e2e",
+		value: '#2e2e2e',
+		auto: '#2e2e2e',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -247,8 +248,8 @@ export const settings: Settings = new Settings({
 	customBackgroundSecondaryIndent: {
 		name: 'Highlighted background',
 		type: 'color',
-		value: "#474747",
-		auto: "#474747",
+		value: '#474747',
+		auto: '#474747',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -256,8 +257,8 @@ export const settings: Settings = new Settings({
 	customBackgroundSecondaryActive: {
 		name: 'Clicked background',
 		type: 'color',
-		value: "#374143",
-		auto: "#374143",
+		value: '#374143',
+		auto: '#374143',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -265,8 +266,8 @@ export const settings: Settings = new Settings({
 	customBackgroundAccentIndent: {
 		name: 'Accent',
 		type: 'color',
-		value: "#3d565c",
-		auto: "#3d565c",
+		value: '#3d565c',
+		auto: '#3d565c',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -274,8 +275,8 @@ export const settings: Settings = new Settings({
 	customBackgroundAccentActive: {
 		name: 'Clicked accent',
 		type: 'color',
-		value: "#3d565c",
-		auto: "#3d565c",
+		value: '#3d565c',
+		auto: '#3d565c',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -283,8 +284,8 @@ export const settings: Settings = new Settings({
 	customBackgroundAccentSecondaryIndent: {
 		name: 'Accent',
 		type: 'color',
-		value: "#373737",
-		auto: "#373737",
+		value: '#373737',
+		auto: '#373737',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -292,8 +293,8 @@ export const settings: Settings = new Settings({
 	customBackgroundAccentSecondaryActive: {
 		name: 'Clicked accent',
 		type: 'color',
-		value: "#3d3d3d",
-		auto: "#3d3d3d",
+		value: '#3d3d3d',
+		auto: '#3d3d3d',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -301,8 +302,8 @@ export const settings: Settings = new Settings({
 	customText: {
 		name: 'Text',
 		type: 'color',
-		value: "#cccccc",
-		auto: "#cccccc",
+		value: '#cccccc',
+		auto: '#cccccc',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -310,8 +311,8 @@ export const settings: Settings = new Settings({
 	customTextSelect: {
 		name: 'Selection',
 		type: 'color',
-		value: "#4d4d4d",
-		auto: "#4d4d4d",
+		value: '#4d4d4d',
+		auto: '#4d4d4d',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -319,8 +320,8 @@ export const settings: Settings = new Settings({
 	customTextWeak: {
 		name: 'Weak text',
 		type: 'color',
-		value: "#808080",
-		auto: "#808080",
+		value: '#808080',
+		auto: '#808080',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -328,8 +329,8 @@ export const settings: Settings = new Settings({
 	customTextAccent: {
 		name: 'Aff text',
 		type: 'color',
-		value: "#addeeb",
-		auto: "#addeeb",
+		value: '#addeeb',
+		auto: '#addeeb',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -337,8 +338,8 @@ export const settings: Settings = new Settings({
 	customTextAccentSelect: {
 		name: 'Aff selection',
 		type: 'color',
-		value: "#0b4f60",
-		auto: "#0b4f60",
+		value: '#0b4f60',
+		auto: '#0b4f60',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -346,8 +347,8 @@ export const settings: Settings = new Settings({
 	customTextAccentWeak: {
 		name: 'Aff weak text',
 		type: 'color',
-		value: "#6c8b93",
-		auto: "#6c8b93",
+		value: '#6c8b93',
+		auto: '#6c8b93',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -355,8 +356,8 @@ export const settings: Settings = new Settings({
 	customTextAccentSecondary: {
 		name: 'Neg text',
 		type: 'color',
-		value: "#ebc8ad",
-		auto: "#ebc8ad",
+		value: '#ebc8ad',
+		auto: '#ebc8ad',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -364,8 +365,8 @@ export const settings: Settings = new Settings({
 	customTextAccentSecondarySelect: {
 		name: 'Neg selection',
 		type: 'color',
-		value: "#60300b",
-		auto: "#60300b",
+		value: '#60300b',
+		auto: '#60300b',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -373,8 +374,8 @@ export const settings: Settings = new Settings({
 	customTextAccentSecondaryWeak: {
 		name: 'Weak neg text',
 		type: 'color',
-		value: "#937d6c",
-		auto: "#937d6c",
+		value: '#937d6c',
+		auto: '#937d6c',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -382,8 +383,8 @@ export const settings: Settings = new Settings({
 	customColor: {
 		name: 'Selected lines',
 		type: 'color',
-		value: "#6b6b6b",
-		auto: "#6b6b6b",
+		value: '#6b6b6b',
+		auto: '#6b6b6b',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -391,8 +392,8 @@ export const settings: Settings = new Settings({
 	customColorFade: {
 		name: 'Unselected Lines',
 		type: 'color',
-		value: "#525252",
-		auto: "#525252",
+		value: '#525252',
+		auto: '#525252',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -400,8 +401,8 @@ export const settings: Settings = new Settings({
 	customColorAccent: {
 		name: 'Aff selected lines',
 		type: 'color',
-		value: "#408596",
-		auto: "#408596",
+		value: '#408596',
+		auto: '#408596',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -409,8 +410,8 @@ export const settings: Settings = new Settings({
 	customColorAccentFade: {
 		name: 'Aff highlighted lines',
 		type: 'color',
-		value: "#3d5e66",
-		auto: "#3d5e66",
+		value: '#3d5e66',
+		auto: '#3d5e66',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -418,8 +419,8 @@ export const settings: Settings = new Settings({
 	customColorAccentSecondary: {
 		name: 'Neg selected lines',
 		type: 'color',
-		value: "#966540",
-		auto: "#966540",
+		value: '#966540',
+		auto: '#966540',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -427,8 +428,8 @@ export const settings: Settings = new Settings({
 	customColorAccentSecondaryFade: {
 		name: 'Neg highlighted lines',
 		type: 'color',
-		value: "#664f3d",
-		auto: "#664f3d",
+		value: '#664f3d',
+		auto: '#664f3d',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		}
@@ -436,8 +437,8 @@ export const settings: Settings = new Settings({
 	customScrollbarThumb: {
 		name: 'Scrollbar thumb',
 		type: 'color',
-		value: "#808080",
-		auto: "#808080",
+		value: '#808080',
+		auto: '#808080',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		},
@@ -446,8 +447,8 @@ export const settings: Settings = new Settings({
 	customScrollbarThumbHover: {
 		name: 'Hovered scrollbar thumb',
 		type: 'color',
-		value: "#8c8c8c",
-		auto: "#8c8c8c",
+		value: '#8c8c8c',
+		auto: '#8c8c8c',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		},
@@ -456,8 +457,8 @@ export const settings: Settings = new Settings({
 	customScrollbarBackground: {
 		name: 'Scrollbar background',
 		type: 'color',
-		value: "#1a1a1a",
-		auto: "#1a1a1a",
+		value: '#1a1a1a',
+		auto: '#1a1a1a',
 		visibilityCondition: () => {
 			return settings.data.colorTheme.value == 3;
 		},
@@ -734,26 +735,47 @@ export const settingsGroups: SettingsGroup[] = [
 	{
 		name: 'Background Colors',
 		settings: [
-			'customBackgroundBack', 'customBackground', 'customBackgroundIndent', 'customBackgroundActive',
-			'customBackgroundAccentIndent', 'customBackgroundAccentActive'
+			'customBackgroundBack',
+			'customBackground',
+			'customBackgroundIndent',
+			'customBackgroundActive',
+			'customBackgroundAccentIndent',
+			'customBackgroundAccentActive'
 		]
 	},
 	{
 		name: 'Neg Background Colors',
-		settings: ['customBackgroundSecondary', 'customBackgroundSecondaryIndent', 'customBackgroundSecondaryActive',
-			'customBackgroundAccentSecondaryIndent', 'customBackgroundAccentSecondaryActive'
+		settings: [
+			'customBackgroundSecondary',
+			'customBackgroundSecondaryIndent',
+			'customBackgroundSecondaryActive',
+			'customBackgroundAccentSecondaryIndent',
+			'customBackgroundAccentSecondaryActive'
 		]
 	},
 	{
 		name: 'Text Colors',
-		settings: ['customText', 'customTextSelect', 'customTextWeak', 'customTextAccent', 'customTextAccentSelect',
-			'customTextAccentWeak', 'customTextAccentSecondary', 'customTextAccentSecondarySelect', 'customTextAccentSecondaryWeak',
+		settings: [
+			'customText',
+			'customTextSelect',
+			'customTextWeak',
+			'customTextAccent',
+			'customTextAccentSelect',
+			'customTextAccentWeak',
+			'customTextAccentSecondary',
+			'customTextAccentSecondarySelect',
+			'customTextAccentSecondaryWeak'
 		]
 	},
 	{
 		name: 'Line Colors',
-		settings: ['customColor', 'customColorFade', 'customColorAccent', 'customColorAccentFade',
-			'customColorAccentSecondary', 'customColorAccentSecondaryFade'
+		settings: [
+			'customColor',
+			'customColorFade',
+			'customColorAccent',
+			'customColorAccentFade',
+			'customColorAccentSecondary',
+			'customColorAccentSecondaryFade'
 		]
 	},
 	{
@@ -778,7 +800,12 @@ export const settingsGroups: SettingsGroup[] = [
 	},
 	{
 		name: 'Toolbar',
-		settings: ['showUndoRedoButtons', 'showBoxCreationButtons', 'showQuickExtensionButtons', 'showBoxFormatButtons']
+		settings: [
+			'showUndoRedoButtons',
+			'showBoxCreationButtons',
+			'showQuickExtensionButtons',
+			'showBoxFormatButtons'
+		]
 	},
 	{
 		name: 'Scrollbars',

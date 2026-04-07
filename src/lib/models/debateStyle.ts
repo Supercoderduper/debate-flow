@@ -10,7 +10,8 @@ export const debateStyleMap = [
 	'bigQuestions',
 	'nofSpar',
 	'parli',
-	'classic'
+	'classic',
+	'britishParliamentary'
 ] as const;
 
 export type DebateStyleKey = (typeof debateStyleMap)[number];
@@ -23,7 +24,7 @@ export function getDebateStyle(): DebateStyle {
 	return debateStyles[debateStyleMap[settings.data.debateStyle.value as number]];
 }
 export function getAllDebateStyleFlows(): DebateStyleFlow[] {
-	let debateStyle = getDebateStyle();
+	const debateStyle = getDebateStyle();
 	if (
 		debateStyle.alternativeFlowSelectorSettingName &&
 		debateStyle.alternativeFlowSelectorSettingName in settings.data
@@ -41,7 +42,7 @@ export function getAllDebateStyleFlows(): DebateStyleFlow[] {
 export function getDebateStyleFlow(
 	flowPostion: DebateTemplateKey | number
 ): DebateStyleFlow | null {
-	let debateFlows = getAllDebateStyleFlows();
+	const debateFlows = getAllDebateStyleFlows();
 
 	let index;
 	if (typeof flowPostion == 'number') {
@@ -691,5 +692,24 @@ export const debateStyles: {
 				secondary: false
 			}
 		]
+	},
+	britishParliamentary: {
+		flows: [
+			{ name: 'OG', columns: ['PM', 'LO', 'DPM', 'DLO', 'MG', 'MO', 'GW', 'CW'], invert: false },
+			{ name: 'OO', columns: ['LO', 'DPM', 'DLO', 'MG', 'MO', 'GW', 'CW'], invert: true },
+			{ name: 'CG', columns: ['MG', 'MO', 'GW', 'CW'], invert: false },
+			{ name: 'CO', columns: ['MO', 'GW', 'CW'], invert: true }
+		],
+		timerSpeeches: [
+			{ name: 'PM', time: 7 * 60 * 1000, secondary: false },
+			{ name: 'LO', time: 7 * 60 * 1000, secondary: true },
+			{ name: 'DPM', time: 7 * 60 * 1000, secondary: false },
+			{ name: 'DLO', time: 7 * 60 * 1000, secondary: true },
+			{ name: 'MG', time: 7 * 60 * 1000, secondary: false },
+			{ name: 'MO', time: 7 * 60 * 1000, secondary: true },
+			{ name: 'GW', time: 7 * 60 * 1000, secondary: false },
+			{ name: 'CW', time: 7 * 60 * 1000, secondary: true }
+		],
+		prepTime: 15 * 1000
 	}
 };
