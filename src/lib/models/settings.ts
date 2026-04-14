@@ -174,7 +174,8 @@ export const settings: Settings = new Settings({
 				'NOF SPAR',
 				'Parli',
 				'Classic',
-				'British Parliamentary'
+				'British Parliamentary',
+				'International Public Policy Forum'
 			]
 		},
 		info: "Already created flows won't be affected by this setting"

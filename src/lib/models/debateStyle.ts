@@ -11,7 +11,8 @@ export const debateStyleMap = [
 	'nofSpar',
 	'parli',
 	'classic',
-	'britishParliamentary'
+	'britishParliamentary',
+	'ippf'
 ] as const;
 
 export type DebateStyleKey = (typeof debateStyleMap)[number];
@@ -711,5 +712,30 @@ export const debateStyles: {
 			{ name: 'CW', time: 7 * 60 * 1000, secondary: true }
 		],
 		prepTime: 15 * 1000
+	},
+	ippf: {
+		flows: [
+			{
+				name: 'aff',
+				columns: ['A1', 'N1', 'A2', 'N2', 'AR', 'NR'],
+				invert: false
+			},
+			{
+				name: 'neg',
+				columns: ['N1', 'A2', 'N2', 'AR', 'NR'],
+				invert: true
+			}
+		],
+		timerSpeeches: [
+			{ name: 'A1', time: 5 * 60 * 1000, secondary: false },
+			{ name: 'N1', time: 5 * 60 * 1000, secondary: true },
+			{ name: 'BREAK', time: 1.5 * 60 * 1000, secondary: false },
+			{ name: 'A2', time: 5 * 60 * 1000, secondary: false },
+			{ name: 'N2', time: 5 * 60 * 1000, secondary: true },
+			{ name: 'ACX', time: 1 * 60 * 1000, secondary: false },
+			{ name: 'NCX', time: 1 * 60 * 1000, secondary: true },
+			{ name: 'AR', time: 5 * 60 * 1000, secondary: false },
+			{ name: 'NR', time: 5 * 60 * 1000, secondary: true }
+		]
 	}
 };
