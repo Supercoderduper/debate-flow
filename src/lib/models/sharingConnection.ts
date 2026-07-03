@@ -173,7 +173,13 @@ export function addHostConnection(): ConnectionId {
 	connections.update(function (oldConnections) {
 		if (oldConnections.tag != 'host') return oldConnections;
 
-		const conf = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+	const conf = { iceServers: [
+  { urls: "stun:stun.relay.metered.ca:80" },
+  { urls: "turn:global.relay.metered.ca:80", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+  { urls: "turn:global.relay.metered.ca:80?transport=tcp", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+  { urls: "turn:global.relay.metered.ca:443", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+  { urls: "turns:global.relay.metered.ca:443?transport=tcp", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+] };
 		const pc = new RTCPeerConnection(conf);
 		const channel = new Channel<HostMessage, GuestMessage>(
 			pc.createDataChannel(MESSAGE_CHANNEL_NAME)
@@ -266,7 +272,13 @@ export function addHostConnection(): ConnectionId {
 
 export function initGuestConnection() {
 	// set guest to awaiting host key
-	const conf = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+const conf = { iceServers: [
+  { urls: "stun:stun.relay.metered.ca:80" },
+  { urls: "turn:global.relay.metered.ca:80", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+  { urls: "turn:global.relay.metered.ca:80?transport=tcp", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+  { urls: "turn:global.relay.metered.ca:443", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+  { urls: "turns:global.relay.metered.ca:443?transport=tcp", username: "36012f329a4e9b79e4fb65ce", credential: "l2fUGh5+OAJwmdAx" },
+] };
 	const pc = new RTCPeerConnection(conf);
 	const connection: GuestAwaitingHostKey = {
 		tag: 'guestAwaitingHostKey',
